@@ -2,11 +2,10 @@ package models.entities;
 
 import io.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import play.data.validation.Constraints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +15,21 @@ public class Course extends Model {
     @Id
     private Long id;
 
-    @Constraints.Required
+    @Column(nullable = false)
     private String title;
 
-    @Constraints.Required
+    @Column(nullable = false)
     private Float priceAmount;
 
-    @Constraints.Required
+    @Column(nullable = false)
     private Currency priceCurrency;
 
     private Integer enrolment;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "courses")
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "courses")
     private List<Module> modules = new ArrayList<>();
 
     public Long getId() {

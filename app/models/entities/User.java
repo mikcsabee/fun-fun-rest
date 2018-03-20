@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import play.data.validation.Constraints;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +15,10 @@ public class User extends Model {
     @Id
     private Long id;
 
-    @Constraints.Required
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
     @ManyToMany

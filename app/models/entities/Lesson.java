@@ -13,18 +13,57 @@ import java.util.List;
 @Entity
 public class Lesson extends Model {
     @Id
-    public Long id;
+    private Long id;
 
-    @Constraints.Required
-    @Column(name = "ord")
-    public Integer order;
+    @Column(name = "ord", nullable = false)
+    private Integer order;
 
-    @Constraints.Required
-    public String title;
+    @Column(nullable = false)
+    private String title;
 
     @Column(columnDefinition = "TEXT")
-    public String content;
+    private String content;
 
     @ManyToMany
-    public List<Module> modules = new ArrayList<>();
+    private List<Module> modules = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
 }

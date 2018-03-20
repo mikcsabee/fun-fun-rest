@@ -1,8 +1,8 @@
 package models.entities;
 
 import io.ebean.Model;
-import play.data.validation.Constraints;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -12,14 +12,46 @@ import java.util.List;
 @Entity
 public class Module extends Model {
     @Id
-    public Long id;
+    private Long id;
 
-    @Constraints.Required
-    public String name;
-
-    @ManyToMany
-    public List<Course> courses = new ArrayList<>();
+    @Column(nullable = false)
+    private String name;
 
     @ManyToMany
-    public List<Lesson> lessons = new ArrayList<>();
+    private List<Course> courses = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "modules")
+    private List<Lesson> lessons = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 }
