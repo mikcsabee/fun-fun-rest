@@ -17,6 +17,9 @@ public class Module extends Model {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "ord", nullable = false)
+    private Integer order;
+
     @ManyToMany
     private List<Course> courses = new ArrayList<>();
 
@@ -37,6 +40,14 @@ public class Module extends Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public List<Course> getCourses() {

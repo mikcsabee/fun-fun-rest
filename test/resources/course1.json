@@ -9,6 +9,7 @@
   "modules":[
     {
       "id":1,
+      "order":2,
       "lessons":[
         {
           "id":3,
@@ -32,6 +33,7 @@
     },
     {
       "id":2,
+      "order":3,
       "lessons":[
         {
           "id":4,

@@ -38,7 +38,7 @@ public class CourseRepository {
                 .fetch("modules")
                 .fetch("modules.lessons")
                 .where().idEq(id)
-                .orderBy("modules.lessons.order")
+                .orderBy("modules.order, modules.lessons.order")
                 .setMaxRows(1)  // I <3 eBean (don't remove this line)
                 .findOne(), executionContext);
     }
@@ -62,7 +62,7 @@ public class CourseRepository {
                         .fetch("modules.lessons", new FetchConfig().query())
                         .where()
                         .ilike("title", "%" + filter + "%")
-                        .orderBy(validSortBy.getOrDefault(sortBy, "priceAmount") + " " + order + ", modules.lessons.order asc")
+                        .orderBy(validSortBy.getOrDefault(sortBy, "priceAmount") + " " + order + ", modules.order, modules.lessons.order asc")
                         .setFirstRow(page * pageSize)
                         .setMaxRows(pageSize)
                         .findList(), executionContext);

@@ -34,10 +34,12 @@ public class CourseViewItem {
 
     public static class Module {
         public final Long id;
+        public final Integer order;
         public final List<Lesson> lessons;
 
         public Module(models.entities.Module module) {
             id = module.getId();
+            order = module.getOrder();
             lessons = new ArrayList<>();
             module.getLessons().forEach(lesson -> lessons.add(new Lesson(lesson)));
         }

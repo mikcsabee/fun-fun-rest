@@ -9,30 +9,8 @@
     "title":"Course2",
     "modules":[
       {
-        "id":2,
-        "lessons":[
-          {
-            "id":4,
-            "order":1,
-            "title":"Lesson4",
-            "content":"Content4"
-          },
-          {
-            "id":3,
-            "order":2,
-            "title":"Lesson3",
-            "content":"Content3"
-          },
-          {
-            "id":5,
-            "order":5,
-            "title":"Lesson5",
-            "content":"Content5"
-          }
-        ]
-      },
-      {
         "id":3,
+        "order":1,
         "lessons":[
           {
             "id":5,
@@ -53,6 +31,30 @@
             "content":"Content7"
           }
         ]
+      },
+      {
+        "id":2,
+        "order":3,
+        "lessons":[
+          {
+            "id":4,
+            "order":1,
+            "title":"Lesson4",
+            "content":"Content4"
+          },
+          {
+            "id":3,
+            "order":2,
+            "title":"Lesson3",
+            "content":"Content3"
+          },
+          {
+            "id":5,
+            "order":5,
+            "title":"Lesson5",
+            "content":"Content5"
+          }
+        ]
       }
     ]
   },
@@ -67,6 +69,7 @@
     "modules":[
       {
         "id":1,
+        "order":2,
         "lessons":[
           {
             "id":3,
@@ -90,6 +93,7 @@
       },
       {
         "id":2,
+        "order":3,
         "lessons":[
           {
             "id":4,
@@ -124,6 +128,7 @@
     "modules":[
       {
         "id":3,
+        "order":1,
         "lessons":[
           {
             "id":5,

@@ -37,7 +37,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request));
         String expectedResult = readFile("course1.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request));
         String expectedResult = readFile("courses_order_by_price_asc.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request));
         String expectedResult = readFile("courses_order_by_price_desc.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request));
         String expectedResult = readFile("courses_order_by_enrolments_asc.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
 
@@ -86,7 +86,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request));
         String expectedResult = readFile("courses_order_by_enrolments_desc.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class CourseControllerTest extends WithDatabase {
         String actualResult = contentAsString(route(app, request1));
         String expectedResult = readFile("courses_order_by_price_asc.json");
 
-        assertEquals(actualResult, expectedResult);
+        assertEquals(expectedResult, actualResult);
 
         Http.RequestBuilder request2 = new Http.RequestBuilder()
                 .method(GET)
@@ -223,9 +223,9 @@ public class CourseControllerTest extends WithDatabase {
         Lesson lesson6 = LessonBuilder.builder().withTitle("Lesson6").withContent("Content6").withOrder(7).inject();
         Lesson lesson7 = LessonBuilder.builder().withTitle("Lesson7").withContent("Content7").withOrder(8).inject();
 
-        Module module1 = ModuleBuilder.builder().withName("Module1").withLessons(Arrays.asList(lesson1, lesson2, lesson3)).inject();
-        Module module2 = ModuleBuilder.builder().withName("Module2").withLessons(Arrays.asList(lesson3, lesson4, lesson5)).inject();
-        Module module3 = ModuleBuilder.builder().withName("Module3").withLessons(Arrays.asList(lesson5, lesson6, lesson7)).inject();
+        Module module1 = ModuleBuilder.builder().withName("Module1").withOrder(2).withLessons(Arrays.asList(lesson1, lesson2, lesson3)).inject();
+        Module module2 = ModuleBuilder.builder().withName("Module2").withOrder(3).withLessons(Arrays.asList(lesson3, lesson4, lesson5)).inject();
+        Module module3 = ModuleBuilder.builder().withName("Module3").withOrder(1).withLessons(Arrays.asList(lesson5, lesson6, lesson7)).inject();
 
         CourseBuilder
                 .builder()
