@@ -2,10 +2,8 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.entities.Course;
-import models.view.CourseEnrolmentItem;
-import models.view.CourseListItem;
+import models.view.CourseViewItem;
 import models.view.UserEnrolmentItem;
-import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -28,7 +26,7 @@ public class CourseController extends Controller {
     public CompletionStage<Result> single(Long id) {
         return courseRepository
                 .single(id)
-                .thenApplyAsync(item -> ok(Json.toJson(new CourseListItem(item))))
+                .thenApplyAsync(item -> ok(Json.toJson(new CourseViewItem(item))))
                 .exceptionally(e -> badRequest(e.getMessage()));
     }
 
@@ -46,12 +44,12 @@ public class CourseController extends Controller {
 
     public CompletionStage<Result> list(int page, String sortBy, String order, String filter) {
         return courseRepository
-                .page(page, 10, sortBy, order.toUpperCase(), filter)
+                .page(page, sortBy, order.toUpperCase(), filter)
                 .thenApplyAsync(list -> {
-                    List<CourseListItem> output =
+                    List<CourseViewItem> output =
                             list
                             .stream()
-                            .map(CourseListItem::new)
+                            .map(CourseViewItem::new)
                             .collect(Collectors.toList());
                     return ok(Json.toJson(output));
                 })
@@ -64,7 +62,7 @@ public class CourseController extends Controller {
         Course course = Json.fromJson(json, Course.class);
         return courseRepository
                 .insert(course)
-                .thenApplyAsync(c -> ok(Json.toJson(c)));
+                .thenApplyAsync(c -> ok(Json.toJson(new CourseViewItem(c))));
     }
 
     @BodyParser.Of(BodyParser.Json.class)
@@ -73,6 +71,11 @@ public class CourseController extends Controller {
         Course course = Json.fromJson(json, Course.class);
         return courseRepository
                 .update(id, course)
-                .thenApplyAsync(c -> ok(Json.toJson(c)));
+                .thenApplyAsync(c -> {
+                    if(c.isPresent()) {
+                        return ok(Json.toJson(new CourseViewItem(c.get())));
+                    }
+                    return notFound();
+                });
     }
 }

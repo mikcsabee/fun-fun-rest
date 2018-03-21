@@ -8,8 +8,9 @@ create table course (
   title                         varchar(255) not null,
   price_amount                  float not null,
   price_currency                integer not null,
-  enrolment                     integer,
+  enrolments                    integer,
   constraint ck_course_price_currency check ( price_currency in (0,1,2,3)),
+  constraint uq_course_title unique (title),
   constraint pk_course primary key (id)
 );
 

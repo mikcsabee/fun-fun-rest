@@ -3,7 +3,6 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.entities.User;
 import models.view.CourseEnrolmentItem;
-import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -35,7 +34,7 @@ public class UserController extends Controller {
     public CompletionStage<Result> bindCourse(long userId, long courseId) {
         return userRepository
                 .bindCourse(userId, courseId)
-                .thenApplyAsync(c -> ok(Json.toJson(c)));
+                .thenApplyAsync(c -> noContent());
     }
 
     public CompletionStage<Result> courses(long userId) {

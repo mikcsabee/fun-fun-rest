@@ -15,7 +15,7 @@ public class Course extends Model {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String title;
 
     @Column(nullable = false)
@@ -24,7 +24,7 @@ public class Course extends Model {
     @Column(nullable = false)
     private Currency priceCurrency;
 
-    private Integer enrolment;
+    private Integer enrolments;
 
     @ManyToMany(mappedBy = "courses")
     private List<User> users = new ArrayList<>();
@@ -64,12 +64,12 @@ public class Course extends Model {
         this.priceCurrency = priceCurrency;
     }
 
-    public Integer getEnrolment() {
-        return enrolment;
+    public Integer getEnrolments() {
+        return enrolments;
     }
 
-    public void setEnrolment(Integer enrolment) {
-        this.enrolment = enrolment;
+    public void setEnrolments(Integer enrolments) {
+        this.enrolments = enrolments;
     }
 
     public List<User> getUsers() {

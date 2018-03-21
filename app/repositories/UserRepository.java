@@ -44,7 +44,7 @@ public class UserRepository {
 
             if(course != null && user != null) {
                 course.getUsers().add(user);
-                course.setEnrolment(course.getUsers().size());
+                course.setEnrolments(course.getUsers().size());
                 course.save();
                 return true;
             }

@@ -25,6 +25,17 @@ dependencies {
     play "com.typesafe.play:play-guice_$scalaVersion:$playVersion"
     play "com.typesafe.play:play-logback_$scalaVersion:$playVersion"
     play "com.typesafe.play:filters-helpers_$scalaVersion:$playVersion"
+    play "io.ebean:ebean:11.11.1"
+}
+
+ebean {
+    debugLevel = 1
+}
+
+test {
+    useTestNG()
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
 }
 
 repositories {

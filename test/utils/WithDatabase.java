@@ -1,28 +1,30 @@
 package utils;
 
-import com.google.common.collect.ImmutableMap;
-import org.junit.After;
+import io.ebean.Ebean;
+import io.ebean.EbeanServer;
 import org.junit.Before;
-import play.db.Database;
-import play.db.Databases;
-import play.db.evolutions.Evolutions;
+import play.Application;
+import play.db.ebean.EbeanConfig;
+import play.test.Helpers;
+import play.test.WithApplication;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class WithDatabase {
-    protected Database database;
+public class WithDatabase  extends WithApplication {
+    protected EbeanServer ebeanServer;
 
-    @Before
-    public void createDatabase() {
-        database = Databases.inMemory(
-                "testDB",
-                ImmutableMap.of("MODE", "MYSQL"),
-                ImmutableMap.of("logStatements", true)
-        );
-        Evolutions.applyEvolutions(database);
+    @Override
+    protected Application provideApplication() {
+        Map<String, String > settings = new HashMap<>(Helpers.inMemoryDatabase());
+        settings.put("app.pageSize", "3");
+        return Helpers.fakeApplication(settings);
     }
 
-    @After
-    public void shutdownDatabase() {
-        database.shutdown();
+    @Before
+    public void getDatabase() {
+        EbeanConfig ebeanConfig = app.injector().instanceOf(EbeanConfig.class);
+        this.ebeanServer = Ebean.getServer(ebeanConfig.defaultServer());
     }
 }
